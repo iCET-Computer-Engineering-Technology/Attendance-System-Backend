@@ -24,4 +24,12 @@ public class ProjectController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllProjects(){
+        try {
+            return ResponseEntity.ok(projectService.getAllProjects());
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
 }
