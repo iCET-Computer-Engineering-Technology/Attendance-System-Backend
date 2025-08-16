@@ -35,7 +35,6 @@ public class User {
         dto.setUserRole(userRole);
         dto.setEmail(email);
 
-        //10 weni eka
         if(project != null){
           dto.setProjectId(project.getId());
           dto.setName(project.getName());

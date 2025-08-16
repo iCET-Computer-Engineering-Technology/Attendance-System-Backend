@@ -16,7 +16,6 @@ public class UserDTO {
 
     private UserRole userRole;
 
-
     private Long projectId;
 
     private String projectName;
