@@ -25,7 +25,7 @@ public class ProjectService {
 
         return projectRepository.save(project).getDto();
     }
-    //1 t krnne next projectcontroller
+
     public List<ProjectDTO> getAllProjects(){
         return projectRepository.findAll().stream().map(Project::getDto).collect(Collectors.toList());
     }
