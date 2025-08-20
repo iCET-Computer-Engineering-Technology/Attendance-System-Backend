@@ -24,7 +24,7 @@ public class AdminService {
     @Autowired
     private ProjectRepository projectRepository;
 
-    //1 t krne meka - next AdminController
+
 
     public UserDTO createUser(UserDTO dto){
         boolean exists = userRepository.findByEmail(dto.getEmail()).isPresent();
