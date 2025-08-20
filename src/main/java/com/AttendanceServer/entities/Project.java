@@ -9,7 +9,7 @@ import lombok.Data;
 
 import java.util.Date;
 
-// 01 t krnee meka
+
 @Entity
 @Data
 public class Project {
