@@ -1,5 +1,6 @@
 package com.AttendanceServer.entities;
 
+import com.AttendanceServer.dto.AttendanceDTO;
 import com.AttendanceServer.enums.AttendanceStatus;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -26,7 +27,22 @@ public class Attendance {
     @ManyToOne
     private User manager;
 
+    public AttendanceDTO getDto(){
+        AttendanceDTO dto = new AttendanceDTO();
 
+        dto.setId(id);
+        dto.setDate(date);
+        dto.setAttendanceStatus(attendanceStatus);
 
+        dto.setProjectId(project.getId());
+        dto.setProjectName(project.getName());
 
+        dto.setEmployeeId(employee.getId());
+        dto.setEmployeeName(employee.getName());
+
+        dto.setManagerId(manager.getId());
+        dto.setManagerName(manager.getName());
+
+        return  dto;
+    }
 }
