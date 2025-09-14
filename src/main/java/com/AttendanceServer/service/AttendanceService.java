@@ -1,10 +1,14 @@
 package com.AttendanceServer.service;
 
 import com.AttendanceServer.dto.AttendanceDTO;
+import com.AttendanceServer.dto.LeaveRequestDTO;
 import com.AttendanceServer.entities.Attendance;
+import com.AttendanceServer.entities.LeaveRequest;
 import com.AttendanceServer.entities.Project;
 import com.AttendanceServer.entities.User;
+import com.AttendanceServer.enums.UserRole;
 import com.AttendanceServer.repository.AttendanceRepository;
+import com.AttendanceServer.repository.LeaveRequestRepository;
 import com.AttendanceServer.repository.ProjectRepository;
 import com.AttendanceServer.repository.UserRepository;
 import jakarta.persistence.EntityExistsException;
@@ -26,6 +30,9 @@ public class AttendanceService {
 
     @Autowired
     private ProjectRepository projectRepository;
+
+    @Autowired
+    private LeaveRequestRepository leaveRequestRepository;
 
     public AttendanceDTO markAttendance(AttendanceDTO dto){
 
@@ -55,5 +62,24 @@ public class AttendanceService {
         else{
             throw new EntityExistsException("Attendance Already Marked For Today");
         }
+    }
+    public LeaveRequestDTO applyLeave(LeaveRequestDTO dto){
+        Optional<User> optionalEmployee = userRepository.findById(dto.getEmployeeId());
+        Optional<User> optionalManager = userRepository.findByProjectIdAndUserRole(dto.getProjectId(), UserRole.MANAGER);
+        Optional<Project> optionalProject = projectRepository.findById(dto.getProjectId());
+
+        if(optionalEmployee.isPresent() && optionalManager.isPresent() && optionalProject.isPresent()){
+            LeaveRequest leaveRequest = new LeaveRequest();
+
+            leaveRequest.setDate(LocalDate.now());
+            leaveRequest.setEmployee(optionalEmployee.get());
+            leaveRequest.setManager(optionalManager.get());
+            leaveRequest.setProject(optionalProject.get());
+
+            return leaveRequestRepository.save(leaveRequest).getDto();
+        }else {
+            throw new EntityNotFoundException("Some Related Entity Not Found");
+        }
+
     }
 }
