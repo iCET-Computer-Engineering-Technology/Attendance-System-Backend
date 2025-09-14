@@ -33,4 +33,14 @@ public class AttendanceController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @GetMapping("/leaves/employee/{id}")
+    public ResponseEntity<?> getAllEmployeesLeaves(@PathVariable Long id){
+        try{
+            return ResponseEntity.ok(attendanceService.getAllEmployeeLeaves(id));
+
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
