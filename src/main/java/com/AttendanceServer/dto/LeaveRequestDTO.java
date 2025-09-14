@@ -1,7 +1,10 @@
 package com.AttendanceServer.dto;
 
+import lombok.Data;
+
 import java.time.LocalDate;
 
+@Data
 public class LeaveRequestDTO {
 
     private Long id;

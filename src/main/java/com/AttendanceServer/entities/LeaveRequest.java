@@ -1,5 +1,6 @@
 package com.AttendanceServer.entities;
 
+import com.AttendanceServer.dto.LeaveRequestDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -25,4 +26,23 @@ public class LeaveRequest {
 
     @ManyToOne
     private User manager;
+
+    public LeaveRequestDTO getDto(){
+        LeaveRequestDTO dto = new LeaveRequestDTO();
+
+        dto.setId(id);
+        dto.setDate(date);
+        dto.setStatus(status);
+
+        dto.setProjectId(project.getId());
+        dto.setProjectName(project.getName());
+
+        dto.setEmployeeId(employee.getId());
+        dto.setEmployeeName(employee.getName());
+
+        dto.setManagerId(manager.getId());
+        dto.setManagerName(manager.getName());
+
+        return dto;
+    }
 }
